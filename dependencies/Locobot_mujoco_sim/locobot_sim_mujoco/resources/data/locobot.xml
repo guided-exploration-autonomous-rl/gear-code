@@ -1,0 +1,187 @@
+<mujoco model="locobot">
+    <compiler angle="radian"/>
+    <option gravity="0 0 -9.81" />
+    <option timestep="0.002" />
+    <size njmax="500" nconmax="100" />
+    <asset>
+        <mesh name="bump_caster" file="meshes/locobot_meshes/bump_caster.stl" />
+        <mesh name="bumper_collision" file="meshes/locobot_meshes/bumper_collision.stl" />
+        <mesh name="locobot_base_plate" file="meshes/locobot_meshes/locobot_base_plate.stl" />
+        <mesh name="locobot_arm_stand" file="meshes/locobot_meshes/locobot_arm_stand.stl" />
+        <mesh name="mobile_wx200_1_base" file="meshes/locobot_meshes/mobile_wx200_1_base.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_2_shoulder" file="meshes/locobot_meshes/mobile_wx200_2_shoulder.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_3_upper_arm" file="meshes/locobot_meshes/mobile_wx200_3_upper_arm.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_4_forearm" file="meshes/locobot_meshes/mobile_wx200_4_forearm.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_5_wrist" file="meshes/locobot_meshes/mobile_wx200_5_wrist.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_6_gripper" file="meshes/locobot_meshes/mobile_wx200_6_gripper.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_7_gripper_prop" file="meshes/locobot_meshes/mobile_wx200_7_gripper_prop.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_10_ar_tag" file="meshes/locobot_meshes/mobile_wx200_10_ar_tag.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_8_gripper_bar" file="meshes/locobot_meshes/mobile_wx200_8_gripper_bar.stl" scale="0.001 0.001 0.001" />
+        <mesh name="mobile_wx200_9_gripper_finger" file="meshes/locobot_meshes/mobile_wx200_9_gripper_finger.stl" scale="0.001 0.001 0.001" />
+        <mesh name="locobot_arm_cradle" file="meshes/locobot_meshes/locobot_arm_cradle.stl" scale="0.001 0.001 0.001" />
+        <mesh name="locobot_battery" file="meshes/locobot_meshes/locobot_battery.stl" scale="0.001 0.001 0.001" />
+        <mesh name="locobot_camera_tower_small_simple" file="meshes/locobot_meshes/locobot_camera_tower_small_simple.stl" />
+        <mesh name="locobot_pan" file="meshes/locobot_meshes/locobot_pan.stl" scale="0.001 0.001 0.001" />
+        <mesh name="locobot_tilt" file="meshes/locobot_meshes/locobot_tilt.stl" scale="0.001 0.001 0.001" />
+        <mesh name="locobot_camera" file="meshes/locobot_meshes/locobot_camera.stl" scale="0.001 0.001 0.001" />
+        <mesh name="locobot_lidar_tower_simple" file="meshes/locobot_meshes/locobot_lidar_tower_simple.stl" scale="0.001 0.001 0.001" />
+        <mesh name="couch_mesh" file="meshes/couch.stl" scale="0.5 0.5 0.5"/>
+        <mesh name="kitchen_mesh" file="meshes/kitchen.stl" scale="1.25 1.25 1.25" />
+        <mesh name="kitchen_table_mesh" file="meshes/kitchen_table.stl" scale="1.5 1.5 1.5" />
+        <mesh name="chair_mesh" file="meshes/chair.stl" scale="1.1 1.1 1.1" />
+        <mesh name="livingroom_table_mesh" file="meshes/livingroom_table.stl" scale="1.25 1.25 1.25" />
+        <mesh name="tv_stand_mesh" file="meshes/tv_stand.stl" scale="0.75 0.75 0.75" />
+        <texture name="wood" file="textures/dark_wood.png"/>
+        <material name="wood" texture = "wood" texrepeat="1 1" reflectance="0.1" specular="1" shininess="20"/>
+        <texture name="light_wood" file="textures/wood_texture.png"/>
+        <material name="light_wood" texture = "light_wood" texrepeat="1 1" reflectance="0.1" specular="1" shininess="20"/>
+    </asset>
+
+    <!-- <default>
+        <geom type="box" size=".05 .05 .05" />
+        <joint type="free"/>
+    </default> -->
+
+    <worldbody>
+        <light pos="0 0 15" dir="0 0 -1.0" diffuse="1 1 1 " />
+        <!-- <light pos="1.5 1 5" dir="0 0 -1.0" diffuse="1 1 1 " />
+        <light pos="-1.5 1 5" dir="0 0 -1.0" diffuse="1 1 1 " />
+        <light pos="1.5 -1 5" dir="0 0 -1.0" diffuse="1 1 1 " />
+        <light pos="-1.5 -1 5" dir="0 0 -1.0" diffuse="1 1 1 " /> -->
+        <geom type="plane" size="5 5 0.1" pos="0 0 0" rgba="0.4 0.4 0.4 1.0" mass = "0"/>
+
+        <body name="walls">
+            <geom type="box" size="1.1 5 1" pos="4 0 1" rgba="1.0 0.957 0.839 1"/>
+            <geom type="box" size="1.1 5 1" pos="-4 0 1" rgba="1.0 0.957 0.839 1"/>
+            <geom type="box" size="3 1.1 1" pos="0 3 1" rgba="1.0 0.957 0.839 1"/>
+            <geom type="box" size="3 1.1 1" pos="0 -3 1" rgba="1.0 0.957 0.839 1"/>
+        </body>
+
+        <body name="couch">
+            <!-- <joint name="couch" type="free"/> -->
+            <geom pos="-1 0 0" type="mesh" mesh="couch_mesh" rgba="0.6 0.6 0.6 1" euler="0 0 -1.57" mass = "100"/>
+        </body>
+        <body name="kitchen">
+            <!-- <joint name="kitchen" type="free"/> -->
+            <geom pos="2.6 1.3 0" type="mesh" mesh="kitchen_mesh" rgba="0.96 0.87 0.7 1.0" material="light_wood" euler="0 0 -1.57" mass = "100"/>
+        </body>
+        <body name="kitchen_table">
+            <!-- <joint name="kitchen_table" type="free"/> -->
+            <geom pos="0.55 0 -0.05" type="mesh" mesh="kitchen_table_mesh" rgba="1.0 1.0 1.0 1" mass = "100"/>
+        </body>
+        <body name="chair_1">
+            <!-- <joint name="chair_1" type="free"/> -->
+            <geom pos="1.25 0 0.05" type="mesh" mesh="chair_mesh" rgba="1.5 1.5 1.5 1" mass = "1000"/>
+        </body>
+        <body name="chair_2">
+            <!-- <joint name="chair_2" type="free"/> -->
+            <geom pos="0.7 0.45 0.05" type="mesh" mesh="chair_mesh" rgba="1.5 1.5 1.5 1" euler="0 0 1.57" mass = "1000"/>
+        </body>
+        <body name="chair_3">
+            <!-- <joint name="chair_3" type="free"/> -->
+            <geom pos="0.35 0 0.05" type="mesh" mesh="chair_mesh" rgba="1.5 1.5 1.5 1" euler="0 0 3.14" mass = "1000"/>
+        </body>
+        <body name="chair_4">
+            <!-- <joint name="chair_4" type="free"/> -->
+            <geom pos="0.725 -0.45 0.05" type="mesh" mesh="chair_mesh" rgba="1.5 1.5 1.5 1" euler="0 0 -1.57" mass = "1000"/>
+        </body>
+        <body name="livingroom_table">
+            <!-- <joint name="livingroom_table" type="free"/> -->
+            <geom pos="-1.5 0 0" type="mesh" mesh="livingroom_table_mesh" rgba="0.5 0.3 0.2 1.0" material="wood" euler="0 0 -1.57" mass = "100"/>
+        </body>
+        <body name="tv_stand">
+            <!-- <joint name="tv_stand" type="free"/> -->
+            <geom pos="-2.65 0 0.1" type="mesh" mesh="tv_stand_mesh" rgba="0.25 0.25 0.25 1.0" mass = "100"/>
+        </body>
+
+        <body name = "locobot" pos = "2 -1 0" euler="0 0 1.57">
+            <!-- <joint name="free" type="free"/> -->
+            <joint name='advancex' type='slide' axis='1 0 0' pos='0 0 0' />
+            <joint name='advancey' type='slide' axis='0 1 0' pos='0 0 0' />
+            <joint name='rot' type='hinge' axis='0 0 1' pos='0 0 0' limited="false" />
+            <geom size="0.164 0.03" pos="0 0 0.0492" quat="0.707107 0 0 0.707107" type="cylinder" />
+            <geom pos="-0.1098 0 0.009648" quat="0 0.707107 0.707107 0" type="mesh" mesh="bump_caster" />
+            <geom pos="0 0 0.0392" type="mesh" mesh="bumper_collision" />
+            <geom size="0.01" pos="0.125 0 0.0122" quat="0.707107 -0.707107 0 0" rgba="0.1 0.1 0.1 1" />
+            <geom pos="0 0 0.0934" type="mesh" mesh="locobot_base_plate" />
+            <geom pos="0.092002 0 0.101163" type="mesh" mesh="locobot_arm_stand" />
+            <geom pos="-0.003771 0 0.0185128" quat="0.5 0.5 0.5 0.5" type="mesh" mesh="mobile_wx200_1_base" />
+            <geom pos="-0.0345 0 0.104163" type="mesh" mesh="locobot_battery" />
+            <geom pos="-0.048271 0 0.10087" type="mesh" mesh="locobot_camera_tower_small_simple" />
+            <geom pos="-0.010328 0 0.23987" type="mesh" mesh="locobot_arm_cradle" />
+            <geom pos="-0.114366 0 0.50287" type="mesh" mesh="locobot_lidar_tower_simple" />
+            <geom size="0.03785 0.0204" pos="-0.114366 0 0.58802" quat="0 0 0 1" type="cylinder" />
+            <body name="locobot/left_wheel" pos="0 0.1165 0.0402" quat="0.707107 -0.707107 0 0">
+                <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.2" diaginertia="0.000127806 6.76531e-05 6.76531e-05" />
+                <joint name="left_wheel_joint" pos="0 0 0" axis="0 0 1" />
+                <geom size="0.03575 0.0075" type="cylinder" rgba="0.1 0.1 0.1 1" />
+            </body>
+            <body name="locobot/right_wheel" pos="0 -0.1165 0.0402" quat="0.707107 -0.707107 0 0">
+                <inertial pos="0 0 0" quat="0.5 0.5 -0.5 0.5" mass="0.2" diaginertia="0.000127806 6.76531e-05 6.76531e-05" />
+                <joint name="right_wheel_joint" pos="0 0 0" axis="0 0 1" />
+                <geom size="0.03575 0.0075" type="cylinder" rgba="0.1 0.1 0.1 1" />
+            </body>
+            <!-- <body name="locobot/shoulder_link" pos="0.092002 0 0.190338">
+                <inertial pos="2.2321e-05 4.14608e-05 0.0066287" quat="-0.49112 0.4903 0.508682 0.509558" mass="0.480879" diaginertia="0.000588946 0.000555655 0.000378999" />
+                <joint name="waist" pos="0 0 0" axis="0 0 1" limited="true" range="-3.14158 3.14158" frictionloss="0.1" />
+                <geom pos="0 0 -0.003" quat="0.707107 0 0 0.707107" type="mesh" mesh="mobile_wx200_2_shoulder" />
+                <body name="locobot/upper_arm_link" pos="0 0 0.03865">
+                    <inertial pos="0.0119707 -0.000117926 0.139429" quat="0.711412 0.049603 0.049451 0.699276" mass="0.297781" diaginertia="0.00171002 0.00166111 0.000118068" />
+                    <joint name="shoulder" pos="0 0 0" axis="0 1 0" limited="true" range="-1.88496 1.97222" frictionloss="0.1" />
+                    <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="mobile_wx200_3_upper_arm" />
+                    <body name="locobot/forearm_link" pos="0.05 0 0.2">
+                        <inertial pos="0.121192 -0.000123812 0" quat="0.000769878 0.707106 -0.000769878 0.707106" mass="0.283651" diaginertia="0.001206 0.00118501 6.82847e-05" />
+                        <joint name="elbow" pos="0 0 0" axis="0 1 0" limited="true" range="-1.88496 1.62316" frictionloss="0.1" />
+                        <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="mobile_wx200_4_forearm" />
+                        <body name="locobot/wrist_link" pos="0.2 0 0">
+                            <inertial pos="0.04236 -1.0663e-05 0.010577" quat="0.00129144 0.511007 0.00305617 0.85957" mass="0.084957" diaginertia="3.29057e-05 3.082e-05 2.68343e-05" />
+                            <joint name="wrist_angle" pos="0 0 0" axis="0 1 0" limited="true" range="-1.74533 2.14675" frictionloss="0.1" />
+                            <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="mobile_wx200_5_wrist" />
+                            <body name="locobot/gripper_link" pos="0.065 0 0">
+                                <inertial pos="0.0316782 3.65764e-07 0.012917" quat="5.02993e-06 0.841656 -1.757e-05 0.540014" mass="0.126591" diaginertia="0.0030838 0.00307754 0.00305914" />
+                                <joint name="wrist_rotate" pos="0 0 0" axis="1 0 0" limited="true" range="-3.14158 3.14158" frictionloss="0.1" />
+                                <geom pos="-0.02 0 0" quat="0.707107 0 0 0.707107" type="mesh" mesh="mobile_wx200_6_gripper" />
+                                <geom pos="0.026 0 0.04155" type="mesh" mesh="mobile_wx200_10_ar_tag" />
+                                <geom pos="-0.02 0 0" quat="0.707107 0 0 0.707107" type="mesh" mesh="mobile_wx200_8_gripper_bar" />
+                                <body name="locobot/gripper_prop_link" pos="0.0485 0 0">
+                                    <inertial pos="0.000846 -1.6817e-06 4.2e-05" quat="-0.000544073 -0.000402553 -0.376169 0.926551" mass="0.00434" diaginertia="1.1156e-06 9.02926e-07 2.63673e-07" />
+                                    <joint name="gripper" pos="0 0 0" axis="1 0 0" frictionloss="0.1" />
+                                    <geom pos="-0.0685 0 0" quat="0.707107 0 0 0.707107" type="mesh" mesh="mobile_wx200_7_gripper_prop" />
+                                </body>
+                                <body name="locobot/left_finger_link" pos="0.066 0 0">
+                                    <inertial pos="0.013816 0 0" quat="0.463902 0.463902 -0.533661 -0.533661" mass="0.016246" diaginertia="4.79509e-06 3.7467e-06 1.48651e-06" />
+                                    <joint name="left_finger" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="0.015 0.037" frictionloss="0.1" />
+                                    <geom pos="0 0.005 0" quat="0 0 0 -1" type="mesh" mesh="mobile_wx200_9_gripper_finger" />
+                                </body>
+                                <body name="locobot/right_finger_link" pos="0.066 0 0">
+                                    <inertial pos="0.013816 0 0" quat="0.463902 -0.463902 0.533661 -0.533661" mass="0.016246" diaginertia="4.79509e-06 3.7467e-06 1.48651e-06" />
+                                    <joint name="right_finger" pos="0 0 0" axis="0 1 0" type="slide" limited="true" range="-0.037 -0.015" frictionloss="0.1" />
+                                    <geom pos="0 -0.005 0" quat="0 0 1 0" type="mesh" mesh="mobile_wx200_9_gripper_finger" />
+                                </body>
+                            </body>
+                        </body>
+                    </body>
+                </body>
+            </body>
+            <body name="locobot/pan_link" pos="0.012957 0 0.50287">
+                <inertial pos="0.012 0.000496 0.018504" quat="0.2677 0.654485 0.273489 0.652066" mass="0.098997" diaginertia="2.81445e-05 2.7116e-05 2.04295e-05" />
+                <joint name="pan" pos="0 0 0" axis="0 0 1" limited="true" range="-1.5708 1.5708" />
+                <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="locobot_pan" />
+                <body name="locobot/tilt_link" pos="0.025034 0 0.019">
+                    <inertial pos="0.0397927 0.00131822 1.10802e-05" quat="0.502493 0.499107 -0.500611 0.497776" mass="0.091845" diaginertia="6.00159e-05 5.29489e-05 1.55751e-05" />
+                    <joint name="tilt" pos="0 0 0" axis="0 1 0" limited="true" range="-1.5708 1.309" />
+                    <geom quat="0.707107 0 0 0.707107" type="mesh" mesh="locobot_tilt" />
+                    <geom pos="0.05318 0.0175 9e-06" type="mesh" rgba="0.55 0.55 0.55 1" mesh="locobot_camera" />
+                </body>
+            </body> -->
+        </body>
+        <camera name="camera" mode="fixed" pos="0 0 5.5" fovy="60" />
+    </worldbody>
+    
+
+	<actuator>
+		<velocity name="advancex-velocity-servo" joint="advancex" kv="100"/>
+		<velocity name="advancey-velocity-servo" joint="advancey" kv="100"/>
+		<velocity name="rotate-velocity-servo" joint="rot" kv="100"/>
+	</actuator>
+</mujoco>

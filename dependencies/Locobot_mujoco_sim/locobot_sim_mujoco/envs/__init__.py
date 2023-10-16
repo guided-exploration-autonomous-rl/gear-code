@@ -1,0 +1,1 @@
+from locobot_sim_mujoco.envs.locobot_sim_env import LocobotSimMujocoEnv

@@ -1,0 +1,118 @@
+render: False
+
+room:
+  depth: 3 # x max coord
+  width: 2 # y max coord
+  resolution: 0.1
+  cameras: # change the one in the robot manually TODO: make it dependent on this
+    w: 128
+    h: 128
+
+  floor:
+    urdf: "data/structure/floor_patch.urdf"
+    pos: [0, 0, 0.05]
+    texture: "data/textures/floor2.png"
+    scale: 6
+  walls:
+    urdf: "data/structure/walls_rectangular.urdf"
+    pos: [0, 0, 0]
+    texture: "data/textures/wood_texture.png"
+    color: [0.58, 0.29, 0, 1]
+    scale: 4
+  objects:
+    couch:
+      urdf: "data/structure/couch/model.urdf"
+      #texture: "data/materials/fabric/02/roughness.png"
+      colour: [0.64, 0.64, 0.64, 1]
+      pos: [-0.55, 0, 0.25]
+      ori: [0, 0, 4.65] # 1.55 * 3
+      scale: 0.41
+    kitchen_table:
+      urdf: "data/structure/kitchen_table/model.urdf"
+      pos: [0.7, -0.35, 0.25]
+      ori: [1.55, 0, 0]
+      scale: 1.45
+    kitchen_chair_1:
+      urdf: "data/structure/kitchen_chairs/model.urdf"
+      pos: [1.2, 0.15, 0.1]
+      ori: [0, 0, 0]
+      scale: 1
+    kitchen_chair_2:
+      urdf: "data/structure/kitchen_chairs/model.urdf"
+      pos: [0.95, 0.3, 0.1]
+      ori: [0, 0, 1.55]
+      scale: 1
+    kitchen_chair_3:
+      urdf: "data/structure/kitchen_chairs/model.urdf"
+      pos: [0.85, -0.1, 0.1]
+      ori: [0, 0, 3.1]
+      scale: 1
+    kitchen_chair_4:
+      urdf: "data/structure/kitchen_chairs/model.urdf"
+      pos: [1.25, -0.2, 0.1]
+      ori: [0, 0, 4.65]
+      scale: 1
+    living_room_table:
+      urdf: "data/structure/living_table/model.urdf"
+      pos: [-1.2, -0.15, 0.25]
+      ori: [0, 0, 1.55]
+      scale: 1
+    tv_stand:
+      urdf: "data/structure/tv_stand/model.urdf"
+      pos: [-2.65, 0, 0.25]
+      ori: [0, 0, 0]
+      scale: 0.65
+    kitchen:
+      urdf: "data/structure/kitchen/model.urdf"
+      pos: [2.7, 1.5, 0.25]
+      ori: [0, 0, 4.65]
+      scale: 0.9
+    kitchen_cabinet:
+      urdf: "data/structure/kitchen_cabinet/model.urdf"
+      pos: [2.55, -1.7, 0.25]
+      ori: [0, 0, 4.65]
+      colour: [1.2, 1.2, 1.2, 1]
+      scale: 0.5
+    old_cabinet:
+      urdf: "data/structure/old_cabinet/model.urdf"
+      pos: [-2.8, 1.8, 0.25]
+      ori: [0, 0, 3.1]
+      colour: [0.3, 0.3, 0.3, 1]
+      scale: 0.28
+    new_cabinet:
+      urdf: "data/structure/old_cabinet/model.urdf"
+      pos: [-2.8, -1.8, 0.25]
+      ori: [0, 0, 3.1]
+      colour: [1.3, 1.3, 1.3, 1]
+      scale: 0.28
+    one_door_cabinet:
+      urdf: "data/structure/one_door_cabinet/model.urdf"
+      pos: [0, -1.75, 0.25]
+      ori: [0, 0, 4.65]
+      colour: [0.75, 0.45, 0, 1]
+      scale: 0.35
+    white_trash_can:
+      urdf: "data/structure/trash_can/model.urdf"
+      pos: [-2.75, -1, 0.25]
+      ori: [0, 0, 0]
+      colour: [1.2, 1.2, 1.2, 1]
+      scale: 0.15
+    black_trash_can:
+      urdf: "data/structure/trash_can/model.urdf"
+      pos: [2.75, 0.25, 0.25]
+      ori: [0, 0, 0]
+      colour: [0.2, 0.2, 0.2, 1]
+      scale: 0.15
+
+
+robot:
+  urdf: "data/robots/locobot_description.urdf"
+  # urdf: "data/interbotix_xslocobot_descriptions/urdf/locobot.urdf.xacro"
+  pos: [2.25, -1.25, 0.1]
+  # ori: [0, 0, 3.1]
+  # pos: [-2.75, 1, 0.1]
+  scale: 1
+
+  camera:
+    width: 256
+    height: 256

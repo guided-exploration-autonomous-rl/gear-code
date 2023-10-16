@@ -1,0 +1,78 @@
+<?xml version="1.0" ?>
+<robot name="partnet_5268d7d72312c3645fa85fb6e983b148">
+	<link name="base"/>
+	    <contact>
+      		<lateral_friction value="1.0"/>
+      		<rolling_friction value="1"/>
+      		<inertia_scaling value="3.0"/>
+	    </contact>
+	    <inertial>
+	      <origin xyz="0. 0. 0." />
+	      <mass value="100000000" />
+	      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001" />
+	    </inertial>
+	<link name="link_0">
+		<visual name="cover_lid-5">
+			<origin xyz="0.0022665000000000046 0 0.0015525000000000122"/>
+			<geometry>
+				<mesh filename="textured_objs/original-2.obj"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0.0022665000000000046 0 0.0015525000000000122"/>
+			<geometry>
+				<mesh filename="textured_objs/original-2.obj"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="joint_0" type="prismatic">
+		<origin xyz="-0.0022665000000000046 0 -0.0015525000000000122"/>
+		<axis xyz="0 1 0"/>
+		<child link="link_0"/>
+		<parent link="link_1"/>
+		<limit lower="0" upper="0.07600000000000007"/>
+	</joint>
+	<link name="link_1">
+		<visual name="container_box-3">
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="textured_objs/new-2.obj"/>
+			</geometry>
+		</visual>
+		<visual name="container_bottom-4">
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="textured_objs/new-1.obj"/>
+			</geometry>
+		</visual>
+		<visual name="container_bottom-4">
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="textured_objs/new-0.obj"/>
+			</geometry>
+		</visual>
+		<collision>
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="textured_objs/new-2.obj"/>
+			</geometry>
+		</collision>
+		<collision>
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="textured_objs/new-1.obj"/>
+			</geometry>
+		</collision>
+		<collision>
+			<origin xyz="0 0 0"/>
+			<geometry>
+				<mesh filename="textured_objs/new-0.obj"/>
+			</geometry>
+		</collision>
+	</link>
+	<joint name="joint_1" type="fixed">
+		<origin rpy="1.570796326794897 0 -1.570796326794897" xyz="0 0 0"/>
+		<child link="link_1"/>
+		<parent link="base"/>
+	</joint>
+</robot>

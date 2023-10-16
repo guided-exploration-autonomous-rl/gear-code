@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="mobile_arm">
+
+    <xacro:if value="${base_type == 'kobuki'}">
+
+      <joint name="arm_base_link_joint" type="fixed">
+        <axis xyz="0 0 0"/>
+        <xacro:if value="${arm_type == 'mobile_px100'}">
+          <origin rpy="0 0 0" xyz="0.111126 0 0.0095"/>
+        </xacro:if> <!-- arm_type == 'mobile_px100' -->
+        <xacro:if value="${arm_type != 'mobile_px100'}">
+          <origin rpy="0 0 0" xyz="0.097277 0 0.0095"/>
+        </xacro:if> <!-- arm_type != 'mobile_px100' -->
+        <parent link="$(arg robot_name)/plate_link"/>
+        <child link="$(arg robot_name)/arm_base_link"/>
+      </joint>
+
+    </xacro:if> <!-- base_type == 'kobuki' -->
+
+    <xacro:if value="${base_type == 'create3'}">
+
+      <joint name="arm_stand_link_joint" type="fixed">
+        <axis xyz="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0.092002 0 0.007763"/>
+        <parent link="$(arg robot_name)/plate_link"/>
+        <child link="$(arg robot_name)/arm_stand_link"/>
+      </joint>
+
+      <link name="$(arg robot_name)/arm_stand_link">
+        <visual>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://interbotix_xslocobot_descriptions/meshes/locobot_meshes/create3_version/locobot_arm_stand.stl" scale="1 1 1"/>
+          </geometry>
+          <material name="interbotix_black"/>
+        </visual>
+        <collision>
+          <origin rpy="0 0 0" xyz="0 0 0"/>
+          <geometry>
+            <mesh filename="package://interbotix_xslocobot_descriptions/meshes/locobot_meshes/create3_version/locobot_arm_stand.stl" scale="1 1 1"/>
+          </geometry>
+        </collision>
+        <inertial>
+          <origin rpy="0 0 0" xyz="-6.03E-04 0 1.93E-02"/>
+          <mass value="0.134" />
+          <inertia ixx="2.87E-04" iyy="1.25E-04" izz="4.04E-04" ixy="-2.90E-11" ixz="1.80E-07" iyz="6.27E-10" />
+        </inertial>
+      </link>
+
+      <joint name="arm_base_link_joint" type="fixed">
+        <axis xyz="0 0 0"/>
+        <origin rpy="0 0 0" xyz="0 0 0.023"/>
+        <parent link="$(arg robot_name)/arm_stand_link"/>
+        <child link="$(arg robot_name)/arm_base_link"/>
+      </joint>
+
+    </xacro:if> <!-- base_type == 'create3' -->
+
+    <xacro:include filename="$(find interbotix_xslocobot_descriptions)/urdf/arms/$(arg arm_model).urdf.xacro"/>
+
+    <gazebo reference="$(arg robot_name)/arm_base_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/shoulder_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/upper_arm_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/forearm_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/upper_forearm_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/lower_forearm_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/wrist_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+      <self_collide>true</self_collide>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/gripper_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/ar_tag_link">
+      <material>Custom/Interbotix</material>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/gripper_prop_link">
+      <dampingFactor>0.01</dampingFactor>
+      <material>Custom/Interbotix</material>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/gripper_bar_link">
+      <material>Custom/Interbotix</material>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/left_finger_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/right_finger_link">
+      <material>Custom/Interbotix</material>
+      <dampingFactor>0.01</dampingFactor>
+    </gazebo>
+
+    <gazebo reference="$(arg robot_name)/arm_cradle_link">
+      <material>Custom/Interbotix</material>
+    </gazebo>
+
+    <gazebo reference="arm_base_link_joint">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <gazebo reference="plate">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <gazebo reference="ar_tag">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <gazebo reference="ee_arm">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <gazebo reference="gripper_bar">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <gazebo reference="ee_bar">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+    <gazebo reference="ee_gripper">
+      <disableFixedJointLumping>true</disableFixedJointLumping>
+    </gazebo>
+
+  </xacro:macro>
+
+</robot>
